@@ -594,10 +594,11 @@
     <!-- About Section -->
     <section class="about" id="about">
         <div class="container">
-            <h2 class="section-title">About Us</h2>
+            <h2 class="section-title">About Me</h2>
             <div class="profile-container">
                 <div class="profile-image fade-in">
-                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1686&q=80" alt="NickPics Photographer">
+                    <!-- Your profile image -->
+                    <img src="https://nickpics064.github.io/NickPics-Photography-/profile.jpg" alt="NickPics Photographer">
                 </div>
                 <div class="profile-content fade-in delay-1">
                     <h3>Nick Walker</h3>
@@ -686,9 +687,9 @@
                     </div>
                 </div>
                 
-                <!-- Contact image section with your specified image -->
+                <!-- Your contact image -->
                 <div class="contact-image">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80" alt="Contact NickPics Photography">
+                    <img src="https://nickpics064.github.io/NickPics-Photography-/Photo.jpg" alt="Contact NickPics Photography">
                 </div>
             </div>
         </div>
@@ -720,6 +721,10 @@
     </div>
 
     <script>
+        // Base path for your GitHub repository
+        const basePath = "https://nickpics064.github.io/NickPics-Photography-/";
+        const totalPhotos = 26; // You have 26 photos
+        
         // Generate gallery items
         const galleryContainer = document.getElementById('gallery-container');
         const categories = [
@@ -728,7 +733,7 @@
         ];
         
         // Create gallery items for each photo
-        for (let i = 1; i <= 26; i++) {
+        for (let i = 1; i <= totalPhotos; i++) {
             const category = categories[Math.floor(Math.random() * categories.length)];
             
             const galleryItem = document.createElement('div');
@@ -736,7 +741,7 @@
             galleryItem.style.animationDelay = `${i * 0.05}s`;
             
             galleryItem.innerHTML = `
-                <img src="https://picsum.photos/600/400?random=${i}" 
+                <img src="${basePath}photo${i}.jpg" 
                      alt="Photography by NickPics" 
                      data-index="${i}"
                      data-category="${category}">
@@ -800,13 +805,12 @@
         const nextBtn = document.getElementById('next-btn');
         
         let currentIndex = 0;
-        const totalPhotos = 26;
         
         // Open lightbox with clicked image
         document.querySelectorAll('.photo-item img').forEach(img => {
             img.addEventListener('click', () => {
                 currentIndex = parseInt(img.dataset.index);
-                lightboxImg.src = `https://picsum.photos/1200/800?random=${currentIndex}`;
+                lightboxImg.src = `${basePath}photo${currentIndex}.jpg`;
                 lightbox.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
             });
@@ -830,13 +834,13 @@
         prevBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             currentIndex = currentIndex === 1 ? totalPhotos : currentIndex - 1;
-            lightboxImg.src = `https://picsum.photos/1200/800?random=${currentIndex}`;
+            lightboxImg.src = `${basePath}photo${currentIndex}.jpg`;
         });
         
         nextBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             currentIndex = currentIndex === totalPhotos ? 1 : currentIndex + 1;
-            lightboxImg.src = `https://picsum.photos/1200/800?random=${currentIndex}`;
+            lightboxImg.src = `${basePath}photo${currentIndex}.jpg`;
         });
         
         // Keyboard navigation
@@ -844,10 +848,10 @@
             if (lightbox.style.display === 'flex') {
                 if (e.key === 'ArrowLeft') {
                     currentIndex = currentIndex === 1 ? totalPhotos : currentIndex - 1;
-                    lightboxImg.src = `https://picsum.photos/1200/800?random=${currentIndex}`;
+                    lightboxImg.src = `${basePath}photo${currentIndex}.jpg`;
                 } else if (e.key === 'ArrowRight') {
                     currentIndex = currentIndex === totalPhotos ? 1 : currentIndex + 1;
-                    lightboxImg.src = `https://picsum.photos/1200/800?random=${currentIndex}`;
+                    lightboxImg.src = `${basePath}photo${currentIndex}.jpg`;
                 } else if (e.key === 'Escape') {
                     lightbox.style.display = 'none';
                     document.body.style.overflow = 'auto';
